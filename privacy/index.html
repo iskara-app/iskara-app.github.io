@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iskara 隱私政策</title>
+<style>
+  :root { --bg:#fdfdfb; --fg:#1c1c1e; --muted:#6b6b70; --rule:#e5e5e0; --accent:#A16B00; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161c; --fg:#eceef2; --muted:#9a9ca5; --rule:#2a2d36; --accent:#F0A947; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:2.5rem 1.25rem 5rem; background:var(--bg); color:var(--fg);
+         font:16px/1.75 -apple-system, "PingFang TC", "Noto Sans TC", sans-serif; }
+  main { max-width: 40rem; margin: 0 auto; }
+  h1 { font-size:1.6rem; margin:0 0 .25rem; letter-spacing:.01em; }
+  h2 { font-size:1.1rem; margin:2.5rem 0 .75rem; padding-top:1.25rem; border-top:1px solid var(--rule); }
+  .updated { color:var(--muted); font-size:.9rem; margin:0 0 2rem; }
+  .lede { font-size:1.15rem; line-height:1.7; border-left:3px solid var(--accent);
+          padding-left:1rem; margin:0 0 1rem; }
+  ul { padding-left:1.25rem; }
+  li { margin:.35rem 0; }
+  strong { font-weight:600; }
+  a { color:var(--accent); }
+  footer { margin-top:3.5rem; padding-top:1.25rem; border-top:1px solid var(--rule);
+           color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Iskara 隱私政策</h1>
+<p class="updated">最後更新：2026 年 8 月 30 日</p>
+
+<p class="lede">你寫下的日記與照片只存在你的手機裡，不會上傳。這不是承諾，是這個 App 的結構 —— 沒有任何地方可以放它們。</p>
+
+<h2>留在裝置上的東西</h2>
+<p>以下資料<strong>從來不會離開你的手機</strong>：</p>
+<ul>
+  <li>你寫的所有答案</li>
+  <li>你拍的或選擇的照片</li>
+  <li>草稿、抽卡紀錄、每一天翻到哪一張</li>
+</ul>
+<p>因此也請注意：<strong>刪除 App 或更換手機，這些內容就會消失，而且無法復原</strong>。我這邊沒有備份，登入也不會把它們帶回來。</p>
+
+<h2>登入之後才有的東西（選用）</h2>
+<p>不登入也能完整使用這個 App。選擇用 Apple 登入之後，伺服器上會有：</p>
+<ul>
+  <li>Apple 提供的使用者識別碼與電子郵件。你若選擇「隱藏我的電子郵件」，我收到的是 Apple 的轉寄位址，看不到你真正的信箱。</li>
+  <li>你的卡包選擇、提醒時間，以及決定抽卡順序的一個亂數。</li>
+</ul>
+<p>用途只有一個：<strong>換手機時把設定帶著走</strong>。不用於分析、廣告，或任何形式的追蹤。</p>
+<p>你可以隨時在 App 內刪除帳號（設定 → 帳號 → 刪除帳號）。刪除會移除上述所有資料；<strong>你在這台裝置上的日記與照片不受影響，也不會被刪除</strong>。</p>
+
+<h2>卡片回饋（選用，由你主動送出）</h2>
+<p>你在回顧裡對某一張卡送出回饋時，會傳送這五項：卡片編號、你選的評價、你選填的文字、一個隨機產生的裝置識別碼、App 版本。</p>
+<p>那個識別碼與你的帳號、姓名或電子郵件沒有關聯，唯一的用途是辨識同一台裝置對同一張卡的重複回饋。<strong>你的答案不會跟著送出。</strong></p>
+
+<h2>不做的事</h2>
+<ul>
+  <li>不使用任何第三方分析或廣告 SDK</li>
+  <li>不追蹤你在其他 App 或網站上的行為</li>
+  <li>不販售、不交換、不分享你的資料</li>
+  <li>錯誤日誌中永遠不記錄你寫的文字或照片檔名</li>
+</ul>
+
+<h2>資料存放在哪裡</h2>
+<p>帳號設定與卡片回饋存放於 Supabase 代管的資料庫（Amazon Web Services，東京 ap-northeast-1）。題庫內容也從那裡讀取。</p>
+<p>登入相關的身分驗證由 Apple 處理；購買（若日後提供）由 App Store 處理。這兩者都適用它們各自的隱私政策。</p>
+
+<h2>兒童</h2>
+<p>本 App 不以 13 歲以下兒童為對象，也不會刻意收集他們的個人資料。</p>
+
+<h2>政策變更</h2>
+<p>更新時會修改本頁最上方的日期。若涉及新增收集的資料類型，會在 App 內另外說明。</p>
+
+<footer>
+  有任何問題請寄到 <a href="mailto:iskara.app@gmail.com">iskara.app@gmail.com</a>。
+</footer>
+
+</main>
+</body>
+</html>
