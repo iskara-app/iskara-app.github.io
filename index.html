@@ -22,20 +22,17 @@
   main { max-width: 32rem; margin: 0 auto; }
 
   .hero { text-align:center; }
-  .star { width:104px; height:104px; margin:0 auto 1.5rem; display:block; }
+  .emblem { width:120px; height:auto; margin:0 auto 1.75rem; display:block;
+            filter: drop-shadow(0 10px 26px rgba(0,0,0,.30)); }
   h1 { font-size:2rem; margin:0 0 .5rem; letter-spacing:.03em; font-weight:600; }
   .tagline { font-size:1.4rem; line-height:1.6; margin:0 auto .75rem; max-width:22rem;
              font-family: Georgia, "Songti TC", "Noto Serif TC", serif; }
   .sub { color:var(--muted); font-size:1.02rem; margin:0 auto 2.25rem; max-width:21rem; }
 
-  .badge-link { display:inline-block; }
-  .badge-link:active { opacity:.85; }
-  .badge { height:52px; width:auto; vertical-align:middle; }
-  .badge-dark { display:none; }
-  @media (prefers-color-scheme: dark) {
-    .badge-light { display:none; }
-    .badge-dark { display:inline-block; }
-  }
+  .cta { display:inline-flex; align-items:center; justify-content:center; text-decoration:none;
+         background:var(--btn); color:var(--btn-fg); font-size:1.05rem; font-weight:600;
+         padding:.9rem 2rem; border-radius:999px; }
+  .cta:active { opacity:.85; }
   .note { color:var(--muted); font-size:.85rem; margin:1rem 0 0; }
 
   .shots { display:flex; justify-content:center; gap:3.5%; margin:3.5rem 0 1rem; }
@@ -64,27 +61,49 @@
 <main>
 
 <section class="hero">
-  <!-- 呼應 App 卡面的星芒（原創幾何） -->
-  <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+  <!-- 卡背：火花 + 水面倒影，與 App 同一段設計（SparkShape + 夜藍配色） -->
+  <svg class="emblem" viewBox="0 0 120 160" aria-hidden="true">
     <defs>
-      <radialGradient id="g" cx="50%" cy="50%" r="55%">
-        <stop offset="0%" stop-color="#FFE9B0"/>
-        <stop offset="45%" stop-color="#F0A947"/>
-        <stop offset="100%" stop-color="#A16B00"/>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2B3052"/>
+        <stop offset="1" stop-color="#171A2B"/>
+      </linearGradient>
+      <radialGradient id="spark" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset="55%" stop-color="#F0A847"/>
+        <stop offset="100%" stop-color="#C97F1F"/>
+      </radialGradient>
+      <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#F0A847" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#F0A847" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="refl" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+        <stop offset="45%" stop-color="#F0A847" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#F0A847" stop-opacity="0"/>
       </radialGradient>
     </defs>
-    <path d="M50 4 L56 44 L96 50 L56 56 L50 96 L44 56 L4 50 L44 44 Z" fill="url(#g)"/>
-    <path d="M50 22 L52.5 47.5 L78 50 L52.5 52.5 L50 78 L47.5 52.5 L22 50 L47.5 47.5 Z" fill="#FFF6E0" opacity=".9"/>
+    <rect x="1" y="1" width="118" height="158" rx="18" fill="url(#sky)"/>
+    <rect x="9" y="9" width="102" height="142" rx="12" fill="none" stroke="#F0A847" stroke-opacity="0.30" stroke-width="1"/>
+    <rect x="14" y="14" width="92" height="132" rx="9" fill="none" stroke="#F0A847" stroke-opacity="0.13" stroke-width="0.75"/>
+    <circle cx="60" cy="57.6" r="33" fill="url(#glow)"/>
+    <ellipse cx="60" cy="87.6" rx="40" ry="5.5" fill="url(#refl)"/>
+    <g fill="#F7F0E3">
+      <rect x="52" y="96" width="16" height="2" rx="1" opacity="0.16"/>
+      <rect x="45" y="105" width="30" height="2.2" rx="1.1" opacity="0.12"/>
+      <rect x="50" y="114" width="20" height="2" rx="1" opacity="0.08"/>
+    </g>
+    <g transform="translate(30,27.6) scale(0.6)">
+      <path d="M100,50 L57.39,53.06 L63.43,63.43 L53.06,57.39 L50,100 L46.94,57.39 L36.57,63.43 L42.61,53.06 L0,50 L42.61,46.94 L36.57,36.57 L46.94,42.61 L50,0 L53.06,42.61 L63.43,36.57 L57.39,46.94 Z" fill="url(#spark)"/>
+    </g>
+    <rect x="1" y="1" width="118" height="158" rx="18" fill="none" stroke="#F7F0E3" stroke-opacity="0.40" stroke-width="1.5"/>
   </svg>
 
   <h1>Iskara</h1>
   <p class="tagline">每天一個問題，寫給自己。</p>
   <p class="sub">記下當時的你 —— 不上傳、沒有讚、只有你看得到。</p>
 
-  <a class="badge-link" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">
-    <img class="badge badge-light" src="/assets/app-store-badge-black.svg" alt="在 App Store 下載" width="141" height="52">
-    <img class="badge badge-dark" src="/assets/app-store-badge-white.svg" alt="在 App Store 下載" width="141" height="52">
-  </a>
+  <a class="cta" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">在 App Store 下載</a>
   <p class="note">iPhone · 免費下載，內含選購卡包</p>
 </section>
 
@@ -103,10 +122,7 @@
 </section>
 
 <div class="cta-row">
-  <a class="badge-link" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">
-    <img class="badge badge-light" src="/assets/app-store-badge-black.svg" alt="在 App Store 下載" width="141" height="52">
-    <img class="badge badge-dark" src="/assets/app-store-badge-white.svg" alt="在 App Store 下載" width="141" height="52">
-  </a>
+  <a class="cta" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">在 App Store 下載</a>
 </div>
 
 <nav>
