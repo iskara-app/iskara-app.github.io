@@ -52,6 +52,13 @@
   .soon:active { opacity:.7; }
   .soon .dot { width:.5rem; height:.5rem; border-radius:999px; background:var(--accent);
                opacity:.7; }
+  .iab-hint { display:none; margin:0 0 2.25rem; padding:.85rem 1rem; text-align:left;
+              border:1px solid var(--accent); border-radius:12px; color:var(--fg);
+              font-size:.92rem; line-height:1.6; }
+  .iab-hint b { color:var(--accent); font-weight:700; }
+  .iab-hint.flash { animation:iabflash .6s ease 3; }
+  @keyframes iabflash { 0%,100% { box-shadow:0 0 0 0 rgba(240,169,71,0); }
+                        50%     { box-shadow:0 0 0 4px rgba(240,169,71,.35); } }
 
   .shots { display:flex; justify-content:center; gap:3.5%; margin:3.5rem 0 1rem; }
   .shots img { width:48%; max-width:230px; height:auto; border-radius:18px;
@@ -77,6 +84,10 @@
 </head>
 <body>
 <main>
+
+<div class="iab-hint" id="iab">
+  在這個 App 的內建瀏覽器裡開不了 App Store。請點右上角的 <b>⋯</b>，選 <b>在瀏覽器開啟</b>（Safari），再點下載即可。
+</div>
 
 <section class="hero">
   <!-- 卡背：火花 + 水面倒影，與 App 同一段設計（SparkShape + 夜藍配色） -->
@@ -157,16 +168,23 @@
 </main>
 
 <script>
-  // 在 App 內建瀏覽器（Threads 等）裡，https 的 App Store 連結會被當網頁開（白頁），
-  // 不會跳去 App Store App。iOS 上直接把連結換成 itms-apps:// —— 使用者「點連結」
-  // 這個動作，webview 比較會把非 http 的 scheme 交給系統開原生 App Store
-  // （用 JS 主動跳轉常被擋）。桌機維持 https。
+  // Threads / IG / FB 等的內建瀏覽器會擋掉 App Store 跳轉（https 白頁、
+  // itms-apps 無反應），這是那些 App 的限制，任何網頁都無法突破。偵測到這類
+  // 內建瀏覽器時，提示使用者用 Safari 開；並攔下下載鈕，改成閃一下提示，
+  // 避免點了跳到白頁。一般 Safari / 桌機不受影響，連結照常運作。
   (function () {
-    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
-      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (!isIOS) return;
+    var ua = navigator.userAgent || '';
+    var inApp = /FBAN|FBAV|FB_IAB|Instagram|Threads|Barcelona|Line\/|MicroMessenger|Twitter|musical_ly|Snapchat/i.test(ua);
+    if (!inApp) return;
+    var hint = document.getElementById('iab');
+    if (hint) hint.style.display = 'block';
     document.querySelectorAll('a.cta').forEach(function (a) {
-      a.setAttribute('href', 'itms-apps://apps.apple.com/tw/app/iskara/id6804740116?ct=web');
+      a.addEventListener('click', function (e) {
+        if (!hint) return;
+        e.preventDefault();
+        hint.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        hint.classList.remove('flash'); void hint.offsetWidth; hint.classList.add('flash');
+      });
     });
   })();
 </script>
