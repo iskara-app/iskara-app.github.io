@@ -123,8 +123,8 @@
 
   <a class="cta" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">在 App Store 下載</a>
   <p class="note">iPhone · 免費下載，內含選購卡包</p>
-  <a class="soon" href="mailto:iskara.app@gmail.com?subject=Android%20%E7%89%88%E4%B8%8A%E7%B7%9A%E9%80%9A%E7%9F%A5%E6%88%91">
-    <span class="dot"></span>Android 版準備中 · 想收到通知
+  <a class="soon" href="mailto:iskara.app@gmail.com?subject=Android%20%E7%89%88%E4%BA%8B%E5%89%8D%E9%A0%90%E7%B4%84">
+    <span class="dot"></span>Android 版・事前預約
   </a>
 </section>
 
@@ -156,5 +156,23 @@
 </footer>
 
 </main>
+
+<script>
+  // 在 App 內建瀏覽器（Threads 等）裡，https 的 App Store 連結會被當網頁開，
+  // 不會跳去 App Store App。iOS 上改用 itms-apps:// —— webview 不認這個 scheme，
+  // 就會交給系統開原生 App Store。桌機維持 https。
+  (function () {
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!isIOS) return;
+    document.querySelectorAll('a.cta').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href =
+          'itms-apps://apps.apple.com/tw/app/iskara/id6804740116?ct=web';
+      });
+    });
+  })();
+</script>
 </body>
 </html>
