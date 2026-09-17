@@ -118,7 +118,7 @@
   </svg>
 
   <h1>Iskara</h1>
-  <p class="tagline">每天一個問題，寫給自己。</p>
+  <p class="tagline">每天一個問題，寫給自己</p>
   <p class="sub">有些問題，你可能從來沒想過</p>
 
   <a class="cta" href="https://apps.apple.com/tw/app/iskara/id6804740116?ct=web">在 App Store 下載</a>
@@ -157,19 +157,16 @@
 </main>
 
 <script>
-  // 在 App 內建瀏覽器（Threads 等）裡，https 的 App Store 連結會被當網頁開，
-  // 不會跳去 App Store App。iOS 上改用 itms-apps:// —— webview 不認這個 scheme，
-  // 就會交給系統開原生 App Store。桌機維持 https。
+  // 在 App 內建瀏覽器（Threads 等）裡，https 的 App Store 連結會被當網頁開（白頁），
+  // 不會跳去 App Store App。iOS 上直接把連結換成 itms-apps:// —— 使用者「點連結」
+  // 這個動作，webview 比較會把非 http 的 scheme 交給系統開原生 App Store
+  // （用 JS 主動跳轉常被擋）。桌機維持 https。
   (function () {
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
       || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if (!isIOS) return;
     document.querySelectorAll('a.cta').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.location.href =
-          'itms-apps://apps.apple.com/tw/app/iskara/id6804740116?ct=web';
-      });
+      a.setAttribute('href', 'itms-apps://apps.apple.com/tw/app/iskara/id6804740116?ct=web');
     });
   })();
 </script>
